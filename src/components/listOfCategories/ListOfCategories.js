@@ -33,8 +33,6 @@ const useCategoriesData = () => {
 export default function ListOfCategories() {
   const [showFixed, setShowFixed] = useState(false);
   const { categories, loading, error } = useCategoriesData();
-  console.log(loading);
-  console.log(error);
 
   useEffect(() => {
     const onScroll = (e) => {
