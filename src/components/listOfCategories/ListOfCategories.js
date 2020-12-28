@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { List, Item } from "./styles";
 import Category from "../category/Category";
-import NProgress from "nprogress";
-
+import Loading from "../LoadingComponent/loading";
 const useCategoriesData = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -11,7 +10,6 @@ const useCategoriesData = () => {
   useEffect(() => {
     const categoriesData = async () => {
       try {
-        NProgress.start();
         setLoading(true);
         let res = await fetch(
           "https://petgram-server-edsf8xpy2.now.sh/categories"
@@ -20,7 +18,6 @@ const useCategoriesData = () => {
         let data = await res.json();
 
         setCategories(data);
-        NProgress.done();
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -59,9 +56,9 @@ export default function ListOfCategories() {
       ))}
     </List>
   );
-  // if (loading) {
-  //   return <div>loadding...</div>;
-  // }
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <>
       {renderList()} {showFixed && renderList(true)}
