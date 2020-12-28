@@ -10,7 +10,7 @@ export default function PhotoCard({ id, likes = 0, src }) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    // import("intersection-observer");
+    import("intersection-observer");
 
     const observer = new window.IntersectionObserver((entries) => {
       const { isIntersecting } = entries[0];
