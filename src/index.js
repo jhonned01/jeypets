@@ -4,7 +4,7 @@ import App from "./App";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
-  url: "https://petgram-server-jrmfsd-okxluew9o.now.sh/graphql",
+  uri: "https://petgram-server-jrmfsd-okxluew9o.now.sh/graphql",
   cache: new InMemoryCache(),
 });
 

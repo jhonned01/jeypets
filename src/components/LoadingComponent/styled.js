@@ -2,13 +2,13 @@ import styled, { css } from "styled-components";
 
 export const LoadingCompo = css`
   .lds-ellipsis {
-    display: inline-block;
-    position: relative;
+    /* display: inline-block; */
+    /* position: relative; */
     width: 80px;
     height: 80px;
   }
   .lds-ellipsis div {
-    position: absolute;
+    /* position: absolute; */
     top: 33px;
     width: 13px;
     height: 13px;

@@ -1,15 +1,20 @@
 import React from "react";
 import PhotoCard from "../photoCard/PhotoCard";
-import { gql, useQuery } from "@apollo/client";
-
-// const getPhotoCatr
+import Loading from "../LoadingComponent/loading";
+import { useGetPhotos } from "../../hoc/useGetPhoto";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function () {
+export default function ListOfPhotoCards({ categoryID }) {
+  const { loading, error, data } = useGetPhotos(categoryID);
+  // console.log(data);
+
+  if (loading) return <Loading />;
+  if (error) return <p>Error</p>;
+
   return (
     <ul>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((id) => (
-        <PhotoCard key={id} id={id} />
+      {data.photos.map((photoCard) => (
+        <PhotoCard key={photoCard.id} {...photoCard} />
       ))}
     </ul>
   );

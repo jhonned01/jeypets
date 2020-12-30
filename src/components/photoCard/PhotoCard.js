@@ -13,10 +13,6 @@ export default function PhotoCard({ id, likes = 0, src }) {
 
   const [liked, setLiked] = useLocalStorage(key, false);
 
-  console.log("====================================");
-  console.log(liked);
-  console.log("====================================");
-
   useEffect(() => {
     Promise.resolve(
       typeof window.IntersectionObserver !== "undefined"
@@ -37,14 +33,15 @@ export default function PhotoCard({ id, likes = 0, src }) {
   }, [element]);
 
   const Icon = liked ? MdFavorite : MdFavoriteBorder;
+  const Image = src ? src : defaultImage;
 
   return (
     <Article ref={element}>
       {show && (
         <>
-          <a href={`/detail/${id}`}>
+          <a href={`/?detail=${id}`}>
             <ImgWrapper>
-              <Img src={defaultImage} alt="photoCard"></Img>
+              <Img src={src} alt="photoCard"></Img>
             </ImgWrapper>
           </a>
           <Button onClick={() => setLiked(!liked)}>
