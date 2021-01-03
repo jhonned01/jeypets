@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState, Fragment } from "react";
-import { ImgWrapper, Img, Button, Article } from "./styles";
-import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
+import { ImgWrapper, Img, Article } from "./styles";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import FavButton from "../favButton/FavButton";
+import { useLikePhoto } from "../../container/useLikePhoto";
 
 export default function PhotoCard({ id, likes = 0, src }) {
   const defaultImage =
@@ -11,6 +12,7 @@ export default function PhotoCard({ id, likes = 0, src }) {
   const [show, setShow] = useState(false);
   const key = `like-${id}`;
 
+  const [toggleLike] = useLikePhoto();
   const [liked, setLiked] = useLocalStorage(key, false);
 
   useEffect(() => {
@@ -32,8 +34,12 @@ export default function PhotoCard({ id, likes = 0, src }) {
     });
   }, [element]);
 
-  const Icon = liked ? MdFavorite : MdFavoriteBorder;
   const Image = src ? src : defaultImage;
+  const handleFavButtonClick = () => {
+    console.log(`id de la photo ${id}`);
+    setLiked(!liked);
+    toggleLike({ variables: { input: { id: id } } });
+  };
 
   return (
     <Article ref={element}>
@@ -44,10 +50,11 @@ export default function PhotoCard({ id, likes = 0, src }) {
               <Img src={src} alt="photoCard"></Img>
             </ImgWrapper>
           </a>
-          <Button onClick={() => setLiked(!liked)}>
-            <Icon size="32px" />
-            {likes}
-          </Button>
+          <FavButton
+            liked={liked}
+            likes={likes}
+            onClick={handleFavButtonClick}
+          />
         </>
       )}
     </Article>

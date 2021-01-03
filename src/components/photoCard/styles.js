@@ -25,10 +25,10 @@ export const Img = styled.img`
   width: 100%;
 `;
 
-export const Button = styled.button`
-  padding-top: 8px;
-  display: flex;
-  & svg {
-    margin-right: 4px;
-  }
-`;
+// export const Button = styled.button`
+//   padding-top: 8px;
+//   display: flex;
+//   & svg {
+//     margin-right: 4px;
+//   }
+// `;

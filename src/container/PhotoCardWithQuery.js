@@ -1,27 +1,33 @@
 import React from "react";
 import PhotoCard from "../components/photoCard/PhotoCard";
-import { gql, Query } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
+import Loading from "../components/LoadingComponent/loading";
+
+const getSinglePhoto = gql`
+  query SinglePhoto($id: ID!) {
+    photo(id: $id) {
+      id
+      categoryId
+      src
+      likes
+      userId
+      liked
+    }
+  }
+`;
 
 export default function PhotoCardWithQuery({ id }) {
-  const query = gql`
-    query getSinglePhoto($id: ID!) {
-      photo(id: $id) {
-        id
-        categoryId
-        src
-        likes
-        userId
-        liked
-      }
-    }
-  `;
+  const { loading, error, data } = useQuery(getSinglePhoto, {
+    variables: { id },
+  });
 
-  return (
-    <Query query={query} variables={{ id }}>
-      {({ loading, error, data = { photo: {} } }) => {
-        const { photo = {} } = data;
-        return <PhotoCard {...photo}></PhotoCard>;
-      }}
-    </Query>
-  );
+  if (error) {
+    return <div>error ...</div>;
+  } else if (loading) {
+    return <Loading />;
+  } else if (data) {
+    const { photo } = data;
+
+    return <PhotoCard {...photo}></PhotoCard>;
+  }
 }
