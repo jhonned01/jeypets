@@ -1,13 +1,13 @@
 import React from "react";
-import { Anchor, Image } from "./styles";
+import { Link, Image } from "./styles";
 
 export default function Category({ path, emoji, cover }) {
   return (
     <div>
-      <Anchor href={path}>
+      <Link to={path}>
         <Image src={cover} alt="default image" />
         {emoji}
-      </Anchor>
+      </Link>
     </div>
   );
 }

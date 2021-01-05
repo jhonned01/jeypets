@@ -3,6 +3,7 @@ import { ImgWrapper, Img, Article } from "./styles";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import FavButton from "../favButton/FavButton";
 import { useLikePhoto } from "../../container/useLikePhoto";
+import { Link } from "@reach/router";
 
 export default function PhotoCard({ id, likes = 0, src }) {
   const defaultImage =
@@ -35,6 +36,7 @@ export default function PhotoCard({ id, likes = 0, src }) {
   }, [element]);
 
   const Image = src ? src : defaultImage;
+
   const handleFavButtonClick = () => {
     console.log(`id de la photo ${id}`);
     setLiked(!liked);
@@ -45,11 +47,11 @@ export default function PhotoCard({ id, likes = 0, src }) {
     <Article ref={element}>
       {show && (
         <>
-          <a href={`/?detail=${id}`}>
+          <Link to={`/detail/${id}`}>
             <ImgWrapper>
               <Img src={src} alt="photoCard"></Img>
             </ImgWrapper>
-          </a>
+          </Link>
           <FavButton
             liked={liked}
             likes={likes}
