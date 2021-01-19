@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { GlobalStyle } from "./styles/globalStyles";
 import Logo from "./components/logo/logo";
 import Home from "./pages/home";
@@ -9,12 +9,16 @@ import NotRegisterdUser from "./pages/NotRegisterdUser";
 import Detail from "./pages/Detail";
 import { Router } from "@reach/router";
 import NavBar from "./components/navBar/NavBar";
-
-const UserLooged = ({ children }) => {
-  return children({ isAuth: false });
-};
+import { UserContext } from "./Context.js";
 
 export default function App() {
+  let { user } = useContext(UserContext);
+
+  let { isAuth } = user;
+  console.log("====================================");
+  console.log(isAuth);
+  console.log("====================================");
+
   return (
     <>
       <GlobalStyle />
@@ -25,21 +29,18 @@ export default function App() {
         <Detail path="/detail/:detailId" />
       </Router>
 
-      <UserLooged>
-        {({ isAuth }) =>
-          isAuth ? (
-            <Router>
-              <Favs path="/favs/" />
-              <User path="/user/" />
-            </Router>
-          ) : (
-            <Router>
-              <NotRegisterdUser path="/favs" />
-              <NotRegisterdUser path="/user" />
-            </Router>
-          )
-        }
-      </UserLooged>
+      {isAuth ? (
+        <Router>
+          <Favs path="/favs/" />
+          <User path="/user/" />
+        </Router>
+      ) : (
+        <Router>
+          <NotRegisterdUser path="/favs" />
+          <NotRegisterdUser path="/user" />
+        </Router>
+      )}
+
       <NavBar />
     </>
   );
