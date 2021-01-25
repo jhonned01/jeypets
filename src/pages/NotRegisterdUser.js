@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../Context";
+import useForm from "../components/userForn/useForm.jsx";
 
 export default function NotRegisterdUser() {
   // const [{}, dispatch] = useStateValue();
@@ -23,9 +24,7 @@ export default function NotRegisterdUser() {
       {isAuth ? (
         <button onClick={Logout}>hola puto</button>
       ) : (
-        <form onSubmit={Login} Login>
-          <button>Iniciar Sesion </button>
-        </form>
+        <useForm onSubmit={Login} />
       )}
     </div>
   );
