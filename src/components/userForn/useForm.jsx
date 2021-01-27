@@ -1,23 +1,36 @@
 import React, { useState } from "react";
+import { Form, Input, Button, Title } from "./style";
 
-export default function useForm({ onSubmit }) {
+const useInputValue = (initialValue) => {
+  const [value, setValue] = useState(initialValue);
+  const OnChange = (e) => setValue(e.target.value);
+
+  return { value, OnChange };
+};
+
+export default function useForm({ onSubmit, title }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <form onSubmit={onSubmit} Login>
-      <input
-        placeholder={"Email"}
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder={"Email"}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+    <>
+      <Title>{title}</Title>
+      <Form onSubmit={onSubmit}>
+        <Input
+          placeholder={"Email"}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <Input
+          type="password"
+          placeholder={"Contraseña"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-      <button>Iniciar Sesion </button>
-    </form>
+        <Button>{title}</Button>
+      </Form>
+    </>
   );
 }
