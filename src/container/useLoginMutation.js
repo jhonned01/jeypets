@@ -6,13 +6,13 @@ const LOGIN = gql`
   }
 `;
 
-const useRegisterMutation = (email, pasword) => {
+const useLoginMutation = ({ email, password }) => {
   const [login, { data, error, loading }] = useMutation(REGISTER);
 
-  const loginUser = (email, password) => {
-    login({ variables: { input: { email, pasword } } });
+  const loginUser = ({ email, password }) => {
+    login({ variables: { input: { email, password } } });
   };
   return { loginUser, data, error, loading };
 };
 
-export default useRegisterMutation;
+export default useLoginMutation;
