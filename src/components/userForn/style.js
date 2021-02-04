@@ -22,6 +22,10 @@ export const Button = styled.button`
   width: 100%;
   text-align: center;
   font-size: 25px;
+
+  &[disabled] {
+    opacity: 0.3;
+  }
 `;
 
 export const Title = styled.h2`
@@ -32,4 +36,4 @@ export const Title = styled.h2`
 export const Error = styled.span`
   color: red;
   font-size: 14px;
-`
+`;

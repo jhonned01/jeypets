@@ -62,7 +62,9 @@ const RegisterMutation = ({ onSubmit, title }) => {
         </Button>
       </Form>
       {mutationLoading && <span>Loading...</span>}
-      {mutationError && <Error>Error :( Please try again</Error>}
+      {mutationError && (
+        <Error>El usuario ya existe o hay algun problema</Error>
+      )}
     </>
   );
 };
