@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { UserContext } from "../Context";
 import FormUserRegister from "../components/userForn/FormUserRegister.jsx";
-import { useLoginMutation } from "../container/useLoginMutation";
+import useLoginMutation from "../container/useLoginMutation";
+import useRegisterMutation from "../container/useRegisterMutation";
 export default function NotRegisterdUser() {
   // const [{}, dispatch] = useStateValue();
   // const handleSubmit = (e) => {
@@ -20,23 +21,43 @@ export default function NotRegisterdUser() {
 
   let { isAuth } = user;
 
+  const email = "";
+  const password = "";
+
   const {
     loginUser,
     data: dataLogin,
-    error: ErrorLogin,
     loading: loadingLogin,
-  } = useLoginMutation();
+    error: ErrorLogin,
+  } = useLoginMutation(email, password);
+
+  const {
+    registerUser,
+    data: dataRegister,
+    loading: loadingRegister,
+    error: ErrorRegister,
+  } = useRegisterMutation();
   return (
     <div>
       {isAuth ? (
         <button onClick={Logout}>hola puto</button>
       ) : (
         <>
-          <FormUserRegister onSubmit={Login} title={"Regristro Usuario"} />
           <FormUserRegister
-            loginUser={loginUser}
+            onSubmit={Login}
+            title={"Regristro Usuario"}
+            disable={loadingRegister}
+            Error={ErrorRegister}
+            data={dataRegister}
+            mutation={registerUser}
+          />
+          <FormUserRegister
             onSubmit={Login}
             title={"Iniciar sesion"}
+            disable={loadingLogin}
+            error={ErrorLogin}
+            data={dataLogin}
+            mutation={loginUser}
           />
         </>
       )}

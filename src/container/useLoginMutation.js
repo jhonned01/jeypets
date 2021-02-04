@@ -7,9 +7,9 @@ const LOGIN = gql`
 `;
 
 const useLoginMutation = ({ email, password }) => {
-  const [login, { data, error, loading }] = useMutation(REGISTER);
+  const [login, { data, error, loading }] = useMutation(LOGIN);
 
-  const loginUser = ({ email, password }) => {
+  const loginUser = (email, password) => {
     login({ variables: { input: { email, password } } });
   };
   return { loginUser, data, error, loading };
