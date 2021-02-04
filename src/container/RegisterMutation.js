@@ -1,6 +1,12 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { Form, Input, Button, Title } from "../components/userForn/style";
+import {
+  Form,
+  Input,
+  Button,
+  Title,
+  Error,
+} from "../components/userForn/style";
 
 const REGISTER = gql`
   mutation signup($input: UserCredentials!) {
@@ -40,6 +46,7 @@ const RegisterMutation = ({ onSubmit, title }) => {
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           required
+          disabled={mutationLoading}
         />
         <Input
           type="password"
@@ -47,12 +54,15 @@ const RegisterMutation = ({ onSubmit, title }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          disabled={mutationLoading}
         />
 
-        <Button type="submit">{title}</Button>
+        <Button type="submit" disabled={mutationLoading}>
+          {title}
+        </Button>
       </Form>
       {mutationLoading && <span>Loading...</span>}
-      {mutationError && <span>Error :( Please try again</span>}
+      {mutationError && <Error>Error :( Please try again</Error>}
     </>
   );
 };
