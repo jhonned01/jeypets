@@ -11,6 +11,9 @@ export default function FormUserRegister({
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  console.log("si cargo");
+  console.log(disable);
+  console.log("====================================");
   return (
     <>
       <Form
@@ -42,7 +45,7 @@ export default function FormUserRegister({
           {title}
         </Button>
       </Form>
-      {disable && <span>Loading...</span>}
+      {disable && <r>Loading...</r>}
       {error && <Error>El usuario ya existe o hay algun problema</Error>}
     </>
   );

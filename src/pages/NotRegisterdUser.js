@@ -21,15 +21,12 @@ export default function NotRegisterdUser() {
 
   let { isAuth } = user;
 
-  const email = "";
-  const password = "";
-
   const {
     loginUser,
     data: dataLogin,
     loading: loadingLogin,
     error: ErrorLogin,
-  } = useLoginMutation(email, password);
+  } = useLoginMutation();
 
   const {
     registerUser,

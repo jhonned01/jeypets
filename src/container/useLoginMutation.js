@@ -6,11 +6,17 @@ const LOGIN = gql`
   }
 `;
 
-const useLoginMutation = ({ email, password }) => {
+const useLoginMutation = () => {
   const [login, { data, error, loading }] = useMutation(LOGIN);
 
-  const loginUser = (email, password) => {
-    login({ variables: { input: { email, password } } });
+  const loginUser = async ({ email, password }) => {
+    console.log("email:");
+    console.log(email);
+    console.log("====================================");
+    console.log("password:");
+    console.log(password);
+    console.log("====================================");
+    await login({ variables: { input: { email, password } } });
   };
   return { loginUser, data, error, loading };
 };
