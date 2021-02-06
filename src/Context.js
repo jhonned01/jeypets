@@ -6,7 +6,10 @@ const { Provider, Consumer } = UserContext;
 export default function UserProvider({ children }) {
   let [user, setUser] = useState({ isAuth: false });
 
-  const Login = () => {
+  const Login = (token) => {
+    console.log("token:");
+
+    console.log(token);
     setUser({ isAuth: true });
   };
 

@@ -11,23 +11,26 @@ export default function FormUserRegister({
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log("si cargo");
-  console.log(disable);
-  console.log("====================================");
+
   return (
     <>
       <Form
         onSubmit={async (e) => {
           e.preventDefault();
           await mutation({ email, password });
-          await onSubmit();
+          if (data) {
+            console.log("data:");
+            const { login } = data;
+
+            await onSubmit({ login });
+          }
         }}
       >
         <Title>{title}</Title>
         <Input
           placeholder={"Email"}
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value.toLowerCase())}
           type="email"
           required
           disabled={disable}
@@ -36,7 +39,7 @@ export default function FormUserRegister({
           type="password"
           placeholder={"Contraseña"}
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value.toLowerCase())}
           required
           disabled={disable}
         />
@@ -45,7 +48,7 @@ export default function FormUserRegister({
           {title}
         </Button>
       </Form>
-      {disable && <r>Loading...</r>}
+      {disable && <p>Loading...</p>}
       {error && <Error>El usuario ya existe o hay algun problema</Error>}
     </>
   );

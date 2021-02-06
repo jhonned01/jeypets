@@ -6,7 +6,7 @@ const REGISTER = gql`
   }
 `;
 
-const useRegisterMutation = (email, password) => {
+const useRegisterMutation = () => {
   const [register, { data, error, loading }] = useMutation(REGISTER);
 
   const registerUser = async ({ email, password }) => {

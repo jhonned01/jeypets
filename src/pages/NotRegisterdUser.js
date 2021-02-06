@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../Context";
 import FormUserRegister from "../components/userForn/FormUserRegister.jsx";
 import useLoginMutation from "../container/useLoginMutation";
@@ -21,6 +21,8 @@ export default function NotRegisterdUser() {
 
   let { isAuth } = user;
 
+  const [notRegister, setNotRegister] = useState(true);
+
   const {
     loginUser,
     data: dataLogin,
@@ -34,28 +36,45 @@ export default function NotRegisterdUser() {
     loading: loadingRegister,
     error: ErrorRegister,
   } = useRegisterMutation();
+
+  const handleClickRegister = (e) => {
+    e.preventDefault();
+    setNotRegister(!notRegister);
+  };
+
   return (
     <div>
       {isAuth ? (
         <button onClick={Logout}>hola puto</button>
       ) : (
         <>
-          <FormUserRegister
-            onSubmit={Login}
-            title={"Regristro Usuario"}
-            disable={loadingRegister}
-            Error={ErrorRegister}
-            data={dataRegister}
-            mutation={registerUser}
-          />
-          <FormUserRegister
-            onSubmit={Login}
-            title={"Iniciar sesion"}
-            disable={loadingLogin}
-            error={ErrorLogin}
-            data={dataLogin}
-            mutation={loginUser}
-          />
+          {!notRegister && (
+            <FormUserRegister
+              onSubmit={Login}
+              title={"Regristro Usuario"}
+              disable={loadingRegister}
+              Error={ErrorRegister}
+              data={dataRegister}
+              mutation={registerUser}
+            />
+          )}
+          <button
+            onClick={(e) => {
+              handleClickRegister(e);
+            }}
+          >
+            Registrar Usuario ?
+          </button>
+          {notRegister && (
+            <FormUserRegister
+              onSubmit={Login}
+              title={"Iniciar sesion"}
+              disable={loadingLogin}
+              error={ErrorLogin}
+              data={dataLogin}
+              mutation={loginUser}
+            />
+          )}
         </>
       )}
     </div>
