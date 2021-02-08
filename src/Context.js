@@ -4,13 +4,15 @@ const UserContext = createContext();
 const { Provider, Consumer } = UserContext;
 
 export default function UserProvider({ children }) {
-  let [user, setUser] = useState({ isAuth: false });
+  let [user, setUser] = useState(() => {
+    return window.sessionStorage.getItem("token");
+  });
 
   const Login = (token) => {
-    console.log("token:");
-
+    console.log("token context:");
     console.log(token);
-    setUser({ isAuth: true });
+    console.log("====================================");
+    window.sessionStorage.setItem("token", token);
   };
 
   function Logout() {

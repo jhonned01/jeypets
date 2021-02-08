@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Title, Error } from "./style";
 
 export default function FormUserRegister({
@@ -12,18 +12,21 @@ export default function FormUserRegister({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    if (data) {
+      const { signup } = data;
+      console.log("signup:");
+      console.log(signup);
+      onSubmit(signup);
+    }
+  }, [data]);
+
   return (
     <>
       <Form
         onSubmit={async (e) => {
           e.preventDefault();
           await mutation({ email, password });
-          if (data) {
-            console.log("data:");
-            const { login } = data;
-
-            await onSubmit({ login });
-          }
         }}
       >
         <Title>{title}</Title>

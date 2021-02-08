@@ -19,8 +19,6 @@ export default function NotRegisterdUser() {
 
   let { Login, Logout, user } = useContext(UserContext);
 
-  let { isAuth } = user;
-
   const [notRegister, setNotRegister] = useState(true);
 
   const {
@@ -44,20 +42,19 @@ export default function NotRegisterdUser() {
 
   return (
     <div>
-      {isAuth ? (
+      {user ? (
         <button onClick={Logout}>hola puto</button>
       ) : (
         <>
-          {!notRegister && (
-            <FormUserRegister
-              onSubmit={Login}
-              title={"Regristro Usuario"}
-              disable={loadingRegister}
-              Error={ErrorRegister}
-              data={dataRegister}
-              mutation={registerUser}
-            />
-          )}
+          <FormUserRegister
+            onSubmit={Login}
+            title={"Regristro Usuario"}
+            disable={loadingRegister}
+            Error={ErrorRegister}
+            data={dataRegister}
+            mutation={registerUser}
+          />
+
           <button
             onClick={(e) => {
               handleClickRegister(e);
@@ -65,16 +62,15 @@ export default function NotRegisterdUser() {
           >
             Registrar Usuario ?
           </button>
-          {notRegister && (
-            <FormUserRegister
-              onSubmit={Login}
-              title={"Iniciar sesion"}
-              disable={loadingLogin}
-              error={ErrorLogin}
-              data={dataLogin}
-              mutation={loginUser}
-            />
-          )}
+
+          <FormUserRegister
+            onSubmit={Login}
+            title={"Iniciar sesion"}
+            disable={loadingLogin}
+            error={ErrorLogin}
+            data={dataLogin}
+            mutation={loginUser}
+          />
         </>
       )}
     </div>

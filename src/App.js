@@ -14,9 +14,8 @@ import { UserContext } from "./Context.js";
 export default function App() {
   let { user } = useContext(UserContext);
 
-  let { isAuth } = user;
-  console.log("====================================");
-  console.log(isAuth);
+  console.log("user app:");
+  console.log(user);
   console.log("====================================");
 
   return (
@@ -29,7 +28,7 @@ export default function App() {
         <Detail path="/detail/:detailId" />
       </Router>
 
-      {isAuth ? (
+      {user ? (
         <Router>
           <Favs path="/favs/" />
           <User path="/user/" />
