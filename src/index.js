@@ -3,15 +3,18 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import {
   ApolloClient,
+  HttpLink,
   InMemoryCache,
+  from,
   ApolloProvider,
-  createHttpLink,
 } from "@apollo/client";
-import { UserProvider } from "./Context";
 import { setContext } from "@apollo/client/link/context";
+
 import { onError } from "@apollo/client/link/error";
 
-const httpLink = createHttpLink({
+import { UserProvider } from "./Context";
+
+const httpLink = new HttpLink({
   uri: "https://petgram-server-jrmfsd-okxluew9o.now.sh/graphql",
 });
 
@@ -19,17 +22,6 @@ const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = sessionStorage.getItem("token");
   // return the headers to the context so httpLink can read them
-
-  console.log("token headers:");
-  console.log(token);
-  console.log("====================================");
-  onError: (error) => {
-    const { networkError } = error;
-    if (networkError && networkError.result.code === "invalid_token") {
-      window.sessionStorage.removeItem("token");
-      window.location.href = "/";
-    }
-  };
   return {
     headers: {
       ...headers,
@@ -38,9 +30,13 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const middleError = onError(({ networkError }) => {
+  if (networkError) sessionStorage.removeItem("token");
+  window.location = "/user";
+});
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
+  link: from([authLink, middleError, httpLink]),
 });
 
 ReactDOM.render(
