@@ -12,6 +12,7 @@ export default function UserProvider({ children }) {
     console.log("token context:");
     console.log(token);
     console.log("====================================");
+    setUser(token);
     window.sessionStorage.setItem("token", token);
   };
 
