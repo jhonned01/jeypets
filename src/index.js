@@ -9,6 +9,7 @@ import {
 } from "@apollo/client";
 import { UserProvider } from "./Context";
 import { setContext } from "@apollo/client/link/context";
+import { onError } from "@apollo/client/link/error";
 
 const httpLink = createHttpLink({
   uri: "https://petgram-server-jrmfsd-okxluew9o.now.sh/graphql",
@@ -22,6 +23,13 @@ const authLink = setContext((_, { headers }) => {
   console.log("token headers:");
   console.log(token);
   console.log("====================================");
+  onError: (error) => {
+    const { networkError } = error;
+    if (networkError && networkError.result.code === "invalid_token") {
+      window.sessionStorage.removeItem("token");
+      window.location.href = "/";
+    }
+  };
   return {
     headers: {
       ...headers,
