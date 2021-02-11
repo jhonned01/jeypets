@@ -1,5 +1,6 @@
 import React from "react";
+import ListOfFavs from "../components/listOfFavs/ListOfFavs";
 
 export default function Favs() {
-  return <h1>Favs</h1>;
+  return <ListOfFavs />;
 }
