@@ -1,5 +1,6 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { UserContext } from "../Context";
+import Logout from "../components/BottonLogout/Logout.jsx";
 export default function User() {
-  return <h1>User</h1>;
+  return <Logout />;
 }

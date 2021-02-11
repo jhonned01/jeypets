@@ -9,15 +9,13 @@ export default function UserProvider({ children }) {
   });
 
   const Login = (token) => {
-    console.log("token context:");
-    console.log(token);
-    console.log("====================================");
     setUser(token);
     window.sessionStorage.setItem("token", token);
   };
 
   function Logout() {
-    setUser({ isAuth: false });
+    setUser("");
+    window.sessionStorage.removeItem("token");
   }
 
   return <Provider value={{ Login, Logout, user }}>{children}</Provider>;
