@@ -1,10 +1,10 @@
 import React from "react";
 
-import ListOfPhotoCard from "../components/listOfPhotoCards/ListOfPhotoCards";
-import ListOfCategories from "../components/listOfCategories/ListOfCategories";
+import { ListOfPhotoCards } from "../components/listOfPhotoCards/ListOfPhotoCards";
+import { ListOfCategories } from "../components/listOfCategories/ListOfCategories";
 import { Helmet } from "react-helmet";
 
-export default function home({ id }) {
+function homePage({ id }) {
   return (
     <>
       <Helmet>
@@ -16,7 +16,11 @@ export default function home({ id }) {
         />
       </Helmet>
       <ListOfCategories />
-      <ListOfPhotoCard categoryID={id} />
+      <ListOfPhotoCards categoryID={id} />
     </>
   );
 }
+
+export const Home = React.memo(homePage, (prevProps, props) => {
+  return prevProps.id === props.id;
+});

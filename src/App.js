@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalStyle } from "./styles/globalStyles";
 import Logo from "./components/logo/logo";
-import Home from "./pages/home";
-import Favs from "./pages/Favs";
+import { Home } from "./pages/Home";
 import User from "./pages/User";
 import NotRegisterdUser from "./pages/NotRegisterdUser";
 
@@ -12,12 +11,10 @@ import NavBar from "./components/navBar/NavBar";
 import { UserContext } from "./Context.js";
 import NotFound from "./pages/NotFound";
 
+const Favs = React.lazy(() => import("./pages/Favs"));
+
 export default function App() {
   let { user } = useContext(UserContext);
-
-  console.log("user app:");
-  console.log(user);
-  console.log("====================================");
 
   return (
     <>

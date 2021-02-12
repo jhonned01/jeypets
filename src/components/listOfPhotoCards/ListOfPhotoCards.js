@@ -4,7 +4,7 @@ import Loading from "../LoadingComponent/loading";
 import { useGetPhotos } from "../../hoc/useGetPhoto";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function ListOfPhotoCards({ categoryID }) {
+function ListOfPhotoCardsComponents({ categoryID }) {
   const { loading, error, data } = useGetPhotos(categoryID);
   // console.log(data);
 
@@ -19,3 +19,5 @@ export default function ListOfPhotoCards({ categoryID }) {
     </ul>
   );
 }
+
+export const ListOfPhotoCards = React.memo(ListOfPhotoCardsComponents);
