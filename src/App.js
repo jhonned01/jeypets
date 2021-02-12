@@ -32,7 +32,7 @@ export default function App() {
         {!user && <Redirect from="/favs" to="/login" />}
 
         {!user && <Redirect from="/user" to="/login" />}
-        {user && <Redirect from="/user" to="/login" />}
+        {user && <Redirect from="/user" to="/" />}
 
         <Favs path="/favs/" />
         <User path="/user/" />
