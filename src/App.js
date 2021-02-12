@@ -7,9 +7,10 @@ import User from "./pages/User";
 import NotRegisterdUser from "./pages/NotRegisterdUser";
 
 import Detail from "./pages/Detail";
-import { Router } from "@reach/router";
+import { Router, Redirect } from "@reach/router";
 import NavBar from "./components/navBar/NavBar";
 import { UserContext } from "./Context.js";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   let { user } = useContext(UserContext);
@@ -23,22 +24,19 @@ export default function App() {
       <GlobalStyle />
       <Logo />
       <Router>
+        <NotFound default />
         <Home path="/" />
         <Home path="/pet/:id" />
         <Detail path="/detail/:detailId" />
-      </Router>
+        {!user && <NotRegisterdUser path="/login" />}
+        {!user && <Redirect from="/favs" to="/login" />}
 
-      {user ? (
-        <Router>
-          <Favs path="/favs/" />
-          <User path="/user/" />
-        </Router>
-      ) : (
-        <Router>
-          <NotRegisterdUser path="/favs" />
-          <NotRegisterdUser path="/user" />
-        </Router>
-      )}
+        {!user && <Redirect from="/user" to="/login" />}
+        {user && <Redirect from="/user" to="/login" />}
+
+        <Favs path="/favs/" />
+        <User path="/user/" />
+      </Router>
 
       <NavBar />
     </>
