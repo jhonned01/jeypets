@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { Div, Title, Subtitle } from "./styles";
 export default function Layout({ children, title, subtitle }) {
   return (
     <>
@@ -7,10 +8,10 @@ export default function Layout({ children, title, subtitle }) {
         {title && <title>{title} | JeyPet</title>}
         {subtitle && <meta name="description" content={subtitle} />}
       </Helmet>
-      <div>
-        {title && <h1>{title}</h1>}
-        {subtitle && <h2>{subtitle}</h2>}
-      </div>
+      <Div>
+        {title && <Title>{title}</Title>}
+        {subtitle && <Subtitle>{subtitle}</Subtitle>}
+      </Div>
 
       {children}
     </>
