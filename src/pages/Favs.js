@@ -2,7 +2,7 @@ import React from "react";
 import ListOfFavs from "../components/listOfFavs/ListOfFavs";
 import Layout from "../components/Layout/Layout";
 
-export default function Favs() {
+export default () => {
   return (
     <Layout>
       <ListOfFavs
@@ -11,4 +11,4 @@ export default function Favs() {
       />
     </Layout>
   );
-}
+};

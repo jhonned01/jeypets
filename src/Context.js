@@ -14,7 +14,7 @@ export default function UserProvider({ children }) {
   };
 
   function Logout() {
-    setUser("");
+    setUser(false);
     window.sessionStorage.removeItem("token");
   }
 
