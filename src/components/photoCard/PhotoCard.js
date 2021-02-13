@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useRef, useEffect, useState, Fragment } from "react";
 import { ImgWrapper, Img, Article } from "./styles";
 import FavButton from "../favButton/FavButton";
@@ -57,3 +58,9 @@ export default function PhotoCard({ id, likes = 0, liked, src }) {
     </Article>
   );
 }
+
+PhotoCard.propTypes = {
+  id: PropTypes.number,
+  liked: PropTypes.bool,
+  likes: PropTypes.number,
+};

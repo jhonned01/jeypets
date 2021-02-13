@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import PhotoCardWithQuery from "../container/PhotoCardWithQuery";
 import Layout from "../components/Layout/Layout";
@@ -9,3 +10,7 @@ export default function Detail({ detailId }) {
     </Layout>
   );
 }
+
+Detail.propTypes = {
+  detailId: PropTypes.number.isRequired,
+};

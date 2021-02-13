@@ -4,9 +4,7 @@ import { Grid, Image, Link } from "./styles";
 
 export default function ListOfFavs() {
   const { data, loading, error } = useGetFavorite();
-  console.log("====================================");
-  console.log(data);
-  console.log("====================================");
+
   if (error) {
     return <p>{error}</p>;
   } else if (loading) {
